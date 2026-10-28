@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Feed</title>
+</head>
+<body>
+    <h1> Social Media Feed</h1>
+    <p> <a href ="{% url 'logout' %}">Logout</a></p>
+    {% for post in posts %}
+        <div>
+            <h3>{{post.user.username}}</h3>
+            <p>{{post.content}}</p>
+            <small>{{post.created_at|date:"d M Y, h:i A"}}</small>
+            {% if request.user == post.user %}
+                <a href ="{% url 'edit_post' post.id %}"> Edit Post</a>
+                <form method ="POST" action="{% url 'delete_post' post.id %}">
+                    {% csrf_token %}
+                    <button type ="submit"> Delete Post </button>
+                </form>
+
+            {% endif %}
+            <hr>
+        </div>
+    {% empty %}
+        <p>No posts available yet.</p>
+    {% endfor %}
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Post</title>
+</head>
+<body>
+    <h1>Create a Post</h1>
+    <form method ="POST">
+        {% csrf_token %}
+        <label> What's on your mind?</label>
+        <br><br>
+
+        <textarea name="content" rows="5" cols="40"
+                placeholder="Type your post here..." required></textarea>
+        <br><br>
+        <button type="submit">Publish Post</button>
+    </form>
+
+    <p><a href="{% url 'home' %}">Back to Home</a></p>
+</body>
+</html>
